@@ -1,0 +1,78 @@
+-- Create Bookings table
+CREATE TABLE Bookings (
+  BookingID INT PRIMARY KEY AUTO_INCREMENT,
+  Date DATE NOT NULL,
+  TableNumber INT NOT NULL
+);
+
+-- Create Orders table
+CREATE TABLE Orders (
+  OrderID INT PRIMARY KEY AUTO_INCREMENT,
+  OrderDate DATE NOT NULL,
+  Quantity INT NOT NULL,
+  TotalCost DECIMAL(10, 2) NOT NULL,
+  TableNumber INT,
+  FOREIGN KEY (TableNumber) REFERENCES Bookings(BookingID)
+);
+
+-- Create Order delivery status table
+CREATE TABLE OrderDeliveryStatus (
+  DeliveryStatusID INT PRIMARY KEY AUTO_INCREMENT,
+  OrderID INT,
+  DeliveryDate DATE NOT NULL,
+  Status VARCHAR(50) NOT NULL,
+  FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
+);
+
+-- Create Menu table
+CREATE TABLE Menu (
+  CuisineID INT PRIMARY KEY AUTO_INCREMENT,
+  CuisineName VARCHAR(50) NOT NULL
+);
+
+-- Create Starters table
+CREATE TABLE Starters (
+  StarterID INT PRIMARY KEY AUTO_INCREMENT,
+  StarterName VARCHAR(50) NOT NULL,
+  CuisineID INT,
+  FOREIGN KEY (CuisineID) REFERENCES Menu(CuisineID)
+);
+
+-- Create Courses table
+CREATE TABLE Courses (
+  CourseID INT PRIMARY KEY AUTO_INCREMENT,
+  CourseName VARCHAR(50) NOT NULL,
+  CuisineID INT,
+  FOREIGN KEY (CuisineID) REFERENCES Menu(CuisineID)
+);
+
+-- Create Drinks table
+CREATE TABLE Drinks (
+  DrinkID INT PRIMARY KEY AUTO_INCREMENT,
+  DrinkName VARCHAR(50) NOT NULL,
+  CuisineID INT,
+  FOREIGN KEY (CuisineID) REFERENCES Menu(CuisineID)
+);
+
+-- Create Desserts table
+CREATE TABLE Desserts (
+  DessertID INT PRIMARY KEY AUTO_INCREMENT,
+  DessertName VARCHAR(50) NOT NULL,
+  CuisineID INT,
+  FOREIGN KEY (CuisineID) REFERENCES Menu(CuisineID)
+);
+
+-- Create Customer details table
+CREATE TABLE CustomerDetails (
+  CustomerID INT PRIMARY KEY AUTO_INCREMENT,
+  CustomerName VARCHAR(50) NOT NULL,
+  ContactDetails VARCHAR(100) NOT NULL
+);
+
+-- Create Staff information table
+CREATE TABLE StaffInformation (
+  StaffID INT PRIMARY KEY AUTO_INCREMENT,
+  StaffName VARCHAR(50) NOT NULL,
+  Role VARCHAR(50) NOT NULL,
+  Salary DECIMAL(10, 2) NOT NULL
+);
